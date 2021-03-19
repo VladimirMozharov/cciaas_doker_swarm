@@ -1,0 +1,5 @@
+bin/
+lib/
+pyvenv.cfg
+facts_server1.json
+bash_scripts/

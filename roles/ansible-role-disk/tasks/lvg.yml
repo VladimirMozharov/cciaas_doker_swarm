@@ -1,0 +1,11 @@
+---
+- name: Configure LVM volume groups
+  lvg:
+    vg: '{{ item.vg }}'
+    force: '{{ item.force | default(omit) }}'
+    pesize: '{{ item.pesize | default(omit) }}'
+    pv_options: '{{ item.pv_options | default(omit) }}'
+    pvs: '{{ item.pvs | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    vg_options: '{{ item.vg_options | default(omit) }}'
+  with_items: '{{ lvg }}'

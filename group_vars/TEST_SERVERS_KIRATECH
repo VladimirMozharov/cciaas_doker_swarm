@@ -1,0 +1,4 @@
+
+---
+ansible_user                : root
+ansible_ssh_privat_key_file : /home/vladimir/.ssh/id_rsa

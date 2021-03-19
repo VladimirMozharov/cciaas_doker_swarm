@@ -1,0 +1,37 @@
+---
+
+- name: Create new LVM on servers from volume(s)
+  hosts: all
+  become: yes
+  become_user: root
+
+  tasks:
+  - name: Install LVM2 tools
+    yum: name=lvm2 update_cache=yes
+    
+  - name: create lvm
+    import_role:
+      name: ansible-role-disk
+    vars:
+      parted:
+        - device: /dev/sda
+          number: 1
+          label: gpt
+          state: present
+      lvg:
+        - vg: vg_chlg
+          pvs: 
+          - /dev/sda1
+      lvol:
+        - vg: vg_chlg
+          lv: lv_chlg
+          linear: yes
+          size: 100%FREE
+      filesystem:
+        - fstype: xfs
+          dev: /dev/vg_chlg/lv_chlg
+      mount:
+        - path: /mnt/docker
+          src: /dev/vg_chlg/lv_chlg
+          fstype: xfs
+          opts: defaults      

@@ -1,0 +1,14 @@
+---
+- name: Configure block device partitions
+  parted:
+    device: '{{ item.device }}'
+    align: '{{ item.align | default(omit) }}'
+    flags: '{{ item.flags | default(omit) }}'
+    label: '{{ item.label | default("gpt") }}'
+    name: '{{ item.name | default(omit) }}'
+    number: '{{ item.number | default(omit) }}'
+    part_end: '{{ item.part_end | default(omit) }}'
+    part_start: '{{ item.part_start | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    unit: '{{ item.unit | default(omit) }}'
+  with_items: '{{ parted }}'

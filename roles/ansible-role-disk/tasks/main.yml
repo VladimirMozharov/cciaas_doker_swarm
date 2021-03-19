@@ -1,0 +1,20 @@
+---
+- name: Configure block device partitions
+  include: parted.yml
+  when: parted is defined and parted|count > 0
+
+- name: Configure LVM volume groups
+  include: lvg.yml
+  when: lvg is defined and lvg|count > 0
+
+- name: Configure LVM logical volumes
+  include: lvol.yml
+  when: lvol is defined and lvol|count > 0
+
+- name: Makes a filesystem
+  include: filesystem.yml
+  when: filesystem is defined and filesystem|count > 0
+
+- name: Control active and configured mount points
+  include: mount.yml
+  when: mount is defined and mount|count > 0

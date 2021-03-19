@@ -1,0 +1,3 @@
+
+[TEST_SERVERS_KIRATECH]
+CentOS_server2   ansible_host=143.198.229.179
