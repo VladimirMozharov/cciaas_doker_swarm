@@ -13,8 +13,12 @@
     import_role:
       name: "geerlingguy.docker"
   
+  # Issue: docker.service failed because the control process exited with error code
+  # It appears sometimes and I didn't understand from what exactly it depends
+  # Working solution is from: https://stackoverflow.com/a/66383085
+
   - name: Resolve IP table problem for docker on CentOS 8
-    shell: |
+    ansible.builtin.shell: |
       set -o pipefail 
       iptables -I INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
     args:
