@@ -1,0 +1,28 @@
+---
+
+- name: Deploy Docker on all VM
+  hosts: all
+  become: yes
+  become_user: root
+
+  tasks:
+  - name: Intall iptables tools
+    yum: name=iptables update_cache=yes
+
+  - name: Deploy Docker on server
+    import_role:
+      name: "geerlingguy.docker"
+  
+  - name: Resolve IP table problem for docker on CentOS 8
+    shell: |
+      set -o pipefail 
+      iptables -I INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
+    args:
+       executable: /bin/bash
+    register: results
+    changed_when: 'results.stdout_lines == []'
+
+  - name: Start service httpd, if not started
+    ansible.builtin.service:
+      name: docker
+      state: started
