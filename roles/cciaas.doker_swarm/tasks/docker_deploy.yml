@@ -1,0 +1,36 @@
+---
+- name: Ensure that iptables is installed
+  yum:
+    name: iptables.x86_64
+    state: installed
+  notify: install iptables
+
+- name: Install docker.
+  include_role:
+    name: geerlingguy.docker
+  vars:
+    docker_users: docker
+
+- name: Install docker-python package.
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_install_packages:
+    - name: docker
+
+- name: Change DOCKER_ROOT_DIR if it is necessary.
+  copy:
+    src: 'daemon.j2'
+    dest: /etc/docker/daemon.json
+    mode: '0644'
+  when: use_alternative_docker_root_dir
+  notify: restart daemon and docker
+  
+- name: Ensure that daemon.json is empty.
+  copy:
+    content: "{ }"
+    dest: /etc/docker/daemon.json
+    mode: '0644'
+  when: not use_alternative_docker_root_dir
+  notify: restart daemon and docker      
+  

@@ -1,0 +1,15 @@
+---
+# defaults file for cciaas.doker_swarm
+
+min_space_available: 40000000000 #required free space in bytes
+
+docker_default_dir: "/"
+use_alternative_docker_root_dir: false
+default_block_device: "/dev/vda"
+
+alternative_docker_dir: '/mnt/docker'
+alternative_block_device: "/dev/sda"
+
+
+
+

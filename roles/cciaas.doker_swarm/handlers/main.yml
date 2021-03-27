@@ -1,0 +1,14 @@
+---
+# handlers file for cciaas.doker_swarm
+
+- name: install iptables
+  yum:
+    name: iptables.x86_64
+    update_cache: yes
+
+- name: restart daemon and docker
+  systemd:
+    daemon_reload: yes
+    name: docker
+    state: restarted
+

@@ -1,0 +1,32 @@
+---
+- name: Install LVM2 tools.
+  yum:
+    name: lvm2
+    update_cache: true
+  
+- name: Creat lvm on empty disk.
+  import_role:
+    name: ansible-role-disk
+  vars:
+    parted:
+      - device: "{{ alternative_block_device }}"
+        number: 1
+        label: gpt
+        state: present
+    lvg:
+      - vg: vg_chlg
+        pvs: 
+        - "{{ alternative_block_device }}1"
+    lvol:
+      - vg: vg_chlg
+        lv: lv_chlg
+        linear: yes
+        size: 100%FREE
+    filesystem:
+      - fstype: xfs
+        dev: /dev/vg_chlg/lv_chlg
+    mount:
+      - path: "{{ alternative_docker_dir }}"
+        src: /dev/vg_chlg/lv_chlg
+        fstype: xfs
+        opts: defaults      
