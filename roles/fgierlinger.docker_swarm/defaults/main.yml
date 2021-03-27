@@ -1,0 +1,7 @@
+---
+
+# Network interface docker swarm will communicate over
+docker_swarm_network_interface: eth0
+
+# Port docker swarm will communicate on
+docker_swarm_port: 2377

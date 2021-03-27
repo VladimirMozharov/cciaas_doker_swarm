@@ -1,0 +1,76 @@
+---
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 7 * * 0"
+
+defaults:
+  run:
+    working-directory: 'fgierlinger.docker_swarm'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: 'fgierlinger.docker_swarm'
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install ansible ansible-lint!=5.0.0 yamllint
+
+      - name: Lint code.
+        run: |
+          yamllint .
+          ansible-lint
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - distro: geerlingguy/docker-debian9-ansible
+            command: /lib/systemd/systemd
+          - distro: geerlingguy/docker-debian10-ansible
+            command: /lib/systemd/systemd
+          - distro: geerlingguy/docker-centos8-ansible
+            command: /lib/systemd/systemd
+          - distro: geerlingguy/docker-ubuntu1804-ansible
+            command: /lib/systemd/systemd
+          - distro: geerlingguy/docker-ubuntu2004-ansible
+            command: /lib/systemd/systemd
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: 'fgierlinger.docker_swarm'
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install ansible molecule[docker] docker
+
+      - name: Run Molecule tests.
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_COMMAND: ${{ matrix.command }}

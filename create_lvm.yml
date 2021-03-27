@@ -6,10 +6,10 @@
   become_user: root
 
   tasks:
-  - name: Install LVM2 tools
+  - name: Install LVM2 tools.
     yum: name=lvm2 update_cache=yes
     
-  - name: create lvm
+  - name: Creat lvm onempty disk.
     import_role:
       name: ansible-role-disk
     vars:

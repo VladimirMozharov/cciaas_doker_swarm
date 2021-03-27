@@ -1,4 +1,12 @@
+swarm-01 ansible_ssh_host=167.99.215.192
+swarm-02 ansible_ssh_host=178.62.213.161
 
-[TEST_SERVERS_KIRATECH]
-CentOS_server2   ansible_host=143.198.229.179
-CentOS_server3   ansible_host=142.93.111.157 
+[docker_swarm_engine]
+swarm-01
+swarm-02
+
+[docker_swarm_manager]
+swarm-01
+
+[docker_swarm_worker]
+swarm-02

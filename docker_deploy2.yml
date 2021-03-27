@@ -1,0 +1,31 @@
+---
+- name: Deploy doker.
+  hosts: all
+  become: true
+
+  handlers:
+  - name: install iptables
+    yum:
+      name: iptables.x86_64
+      update_cache: yes
+  
+  tasks:
+  - name: Ensure that iptables is installed
+    yum:
+      name: iptables.x86_64
+      state: installed
+    notify: install iptables
+
+  - name: Install docker.
+    include_role:
+      name: geerlingguy.docker
+    vars:
+      docker_users:
+      - docker
+
+  - name: Install docker-python package.
+    include_role:
+      name: geerlingguy.pip
+    vars:
+      pip_install_packages:
+      - name: docker

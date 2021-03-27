@@ -12,4 +12,11 @@ Deploy of Docker CE of VM using https://github.com/geerlingguy/ansible-role-dock
 
 4. docket_deploy.yml
 To expose docker REST API in secure way there are lots of different actions: https://docs.docker.com/engine/security/. I'm going to implement TLS certificates.
-There is one strange glitch - daemon.json doesn't work. So I use role that put all info (tcp & certificates) in systemd docker conf. Now I'm using this to deploy docker - https://github.com/jgeusebroek/ansible-role-docker. 
+There is one strange glitch - daemon.json doesn't work. So I use role that put all info (tcp & certificates) in systemd docker conf. Now I'm using this to deploy docker - https://github.com/jgeusebroek/ansible-role-docker.
+
+5. To add docker swarm i needed to rework all code about docker. I tried some different roles and choose these three to complete the task:
+    - https://github.com/geerlingguy/ansible-role-docker
+    - https://github.com/geerlingguy/ansible-role-pip
+    - https://github.com/fgierlinger/ansible-role-docker-swarm
+Looks like all works stable.
+To secure the connection instead TLS (that always requires some troubleshooting) I decided to use ssh connection that even simpler. 

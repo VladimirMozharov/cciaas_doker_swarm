@@ -7,12 +7,12 @@
 
   tasks:
     # original from https://stackoverflow.com/questions/26981907/using-ansible-to-manage-disk-space
-    - name: Ensure that free space on the tested volume is greater than 40 Gb
+    - name: Ensure that free space on the tested volume is greater than 40 Gb.
       assert:
         that:
           - mount.size_available > min_space_available
-        fail_msg: "Disk space is not sufficient"
-        success_msg: "Disk space is sufficient"
+        fail_msg: "Disk space is not sufficient."
+        success_msg: "Disk space is sufficient."
       vars:
         mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount) | list | first }}"
         min_space_available: 40000000000
