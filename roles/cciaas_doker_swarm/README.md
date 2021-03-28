@@ -6,7 +6,7 @@ Control free disk space and deploy docker swarm on CentOS VMs
 Role Variables
 --------------
 
-min_space_available: 40000000000 #required free space in bytes
+min_space_available: 40000000000 # in bytes
 docker_default_dir: "/"
 default_block_device: "/dev/vda"
 use_alternative_docker_root_dir: false
