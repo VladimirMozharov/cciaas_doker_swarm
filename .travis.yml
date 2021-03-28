@@ -23,5 +23,5 @@ install:
 
 script:
   # Basic role syntax check
-  - ansible-lint .
+  - ansible-lint
   # - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
