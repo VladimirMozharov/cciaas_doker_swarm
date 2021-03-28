@@ -1,27 +1,28 @@
 ---
 language: python
-python: "2.7"
+python: "3.8"
 
-# Use the new container infrastructure
-sudo: false
+# Doc: https://docs.travis-ci.com/user/customizing-the-build#Build-Matrix
+# env:
+#   - ANSIBLE_VERSION=2.10.7
+#   - ANSIBLE_LINT_VERSION=5.0.6
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
+branches:
+  only:
+    - main
+
+before_install:
+  - sudo apt-get update -qq
 
 install:
-  # Install ansible
-  - pip install ansible ansible-lint
-
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  # Install Ansible.
+  - pip3 install ansible
+  - pip3 install ansible-lint
 
 script:
-  # Basic role syntax check
+  # Check the role/playbook's syntax.
+  - ansible-playbook deploy.yml --syntax-check
+  - ansible-playbook -i roles/cciaas_doker_swarm/tests/inventory roles/cciaas_doker_swarm/tests/test.yml --syntax-check
+
+  # Run the ansible-lint with ansible-role
   - ansible-lint
-  # - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
