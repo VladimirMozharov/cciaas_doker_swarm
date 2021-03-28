@@ -20,9 +20,13 @@
 
 - name: Change DOCKER_ROOT_DIR if it is necessary.
   copy:
-    src: 'daemon.j2'
+    content: "{{ json | to_nice_json }}"
     dest: /etc/docker/daemon.json
     mode: '0644'
+  vars:
+    json:
+      graph: "{{ alternative_docker_dir }}"
+      storage-driver: "{{ storage_driver }}"
   when: use_alternative_docker_root_dir
   notify: restart daemon and docker
   
@@ -32,5 +36,8 @@
     dest: /etc/docker/daemon.json
     mode: '0644'
   when: not use_alternative_docker_root_dir
-  notify: restart daemon and docker      
+  notify: restart daemon and docker
+  
+- name: Flush handlers
+  meta: flush_handlers
   

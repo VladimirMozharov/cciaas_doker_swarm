@@ -4,11 +4,13 @@
 min_space_available: 40000000000 #required free space in bytes
 
 docker_default_dir: "/"
-use_alternative_docker_root_dir: false
 default_block_device: "/dev/vda"
 
+
+use_alternative_docker_root_dir: true
 alternative_docker_dir: '/mnt/docker'
 alternative_block_device: "/dev/sda"
+storage_driver: "overlay2" # default for CentOS
 
 
 

@@ -1,42 +1,43 @@
 Role Name
 =========
 
-Control free disk space and deploy docker swarm
+Control free disk space and deploy docker swarm on CentOS VMs
 
-Requirements
+Role Variables
+--------------
+
+min_space_available: 40000000000 #required free space in bytes
+docker_default_dir: "/"
+default_block_device: "/dev/vda"
+use_alternative_docker_root_dir: false
+alternative_docker_dir: '/mnt/docker'
+alternative_block_device: "/dev/sda"
+storage_driver: "overlay2"
+
+Dependencies
 ------------
+
 Following roles must be installed:
 - https://github.com/geerlingguy/ansible-role-docker
 - https://github.com/geerlingguy/ansible-role-pip
 - https://github.com/fgierlinger/ansible-role-docker-swarm
 - https://github.com/kevincoakley/ansible-role-disk
 
-
-Role Variables
---------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+- name: Deploy Docker Swarm on all VM
+  hosts: all
+  become: yes
+  become_user: root
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  vars:
+    min_space_available: 20000000000
+
+  roles:
+  - role: cciaas.doker_swarm
 
 License
 -------
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

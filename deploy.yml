@@ -1,0 +1,10 @@
+- name: Deploy Docker on all VM
+  hosts: all
+  become: yes
+  become_user: root
+
+  vars:
+    min_space_available: 20000000000
+
+  roles:
+  - role: cciaas.doker_swarm

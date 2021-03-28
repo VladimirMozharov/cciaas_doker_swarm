@@ -12,8 +12,8 @@
   with_items:
   - "{{ ansible_mounts }}"
 
-- include_tasks: 
-  name: docker_deploy.yml
+- include_tasks: docker_deploy.yml
   
-- include_role:
-  name: fgierlinger.docker_swarm
+- name: Deploy Docker Swarm.
+  include_role: 
+    name: fgierlinger.docker_swarm
