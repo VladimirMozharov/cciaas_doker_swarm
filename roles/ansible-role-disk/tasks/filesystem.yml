@@ -1,9 +1,0 @@
----
-- name: Makes a filesystem
-  filesystem:
-    dev: '{{ item.dev }}'
-    fstype: '{{ item.fstype }}'
-    force: '{{ item.force | default(omit) }}'
-    opts: '{{ item.opts | default(omit) }}'
-    resizefs: '{{ item.resizefs | default(omit) }}'
-  with_items: '{{ filesystem }}'
