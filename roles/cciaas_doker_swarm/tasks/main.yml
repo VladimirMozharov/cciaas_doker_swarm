@@ -1,5 +1,5 @@
 ---
-# tasks file for cciaas.doker_swarm
+# tasks file for cciaas_doker_swarm
 
 - name: Ensure that free space on the tested volume is greater than 40 Gb.
   assert:

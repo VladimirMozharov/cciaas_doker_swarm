@@ -1,5 +1,5 @@
 ---
-# handlers file for cciaas.doker_swarm
+# handlers file for cciaas_doker_swarm
 
 - name: install iptables
   yum:

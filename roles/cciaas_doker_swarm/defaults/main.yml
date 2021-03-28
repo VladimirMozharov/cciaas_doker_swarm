@@ -1,5 +1,5 @@
 ---
-# defaults file for cciaas.doker_swarm
+# defaults file for cciaas_doker_swarm
 
 min_space_available: 40000000000 #required free space in bytes
 

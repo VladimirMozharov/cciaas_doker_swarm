@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - cciaas.doker_swarm
+    - cciaas_doker_swarm

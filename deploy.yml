@@ -7,4 +7,4 @@
     min_space_available: 20000000000
 
   roles:
-  - role: cciaas.doker_swarm
+  - role: cciaas_doker_swarm
