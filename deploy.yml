@@ -4,7 +4,11 @@
   become_user: root
 
   vars:
-    min_space_available: 20000000000
+    min_space_available: 22000000000 #in kB
+    # docker_default_dir: "/"
+    # default_block_device: "/dev/vda"
+    # alternative_docker_dir: "/mnt/docker"
+    # alternative_block_device: "/dev/sda"
 
   roles:
   - role: cciaas_doker_swarm

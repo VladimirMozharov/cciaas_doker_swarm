@@ -1,16 +1,7 @@
 ---
 # tasks file for cciaas_doker_swarm
 
-- name: Ensure that free space on the tested volume is greater than 40 Gb.
-  assert:
-    that:
-      - mount.size_available > min_space_available
-    fail_msg: "Disk space is not sufficient."
-    success_msg: "Disk space is sufficient."
-  vars:
-    mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount) | list | first }}"
-  with_items:
-  - "{{ ansible_mounts }}"
+- include_tasks: check_space.yml
 
 - include_tasks: docker_deploy.yml
   

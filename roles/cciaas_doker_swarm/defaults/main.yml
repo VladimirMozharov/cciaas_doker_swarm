@@ -6,12 +6,14 @@ min_space_available: 40000000000 #required free space in bytes
 docker_default_dir: "/"
 default_block_device: "/dev/vda"
 
-
-use_alternative_docker_root_dir: true
-alternative_docker_dir: '/mnt/docker'
+# in case we want to save docker images on dedicated lvm on all hosts
+use_alternative_docker_root_dir: false
+alternative_docker_dir: "/mnt/docker"
 alternative_block_device: "/dev/sda"
+alternative_vg_name: "test_vg"
+alternative_lv_name: "test_lv"
 storage_driver: "overlay2" # default for CentOS
 
-
-
-
+# Public key path on local machine for user 'docker'
+pub_key_path: "/home/vladimir/.ssh"
+pub_key_name: "for_docker_user.pub"
