@@ -4,11 +4,10 @@
 - name: install iptables
   yum:
     name: iptables.x86_64
-    update_cache: yes
+    update_cache: true
 
 - name: restart daemon and docker
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
     name: docker
     state: restarted
-

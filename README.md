@@ -2,7 +2,7 @@
 **Code Challenge IaaS Kiratech**
 
 ## Steps of project:
-1. Two VM CentOS 8 (for beginning there is just one for cost's reduce) hosts on Digitalocean
+1. Two VM CentOS 8 (for beginning there is just one for cost's reduce) host on Digitalocean
 
 2. check_disk.yml & create_lvm.yml
 Ensure that the free space is more than 40 Gb.

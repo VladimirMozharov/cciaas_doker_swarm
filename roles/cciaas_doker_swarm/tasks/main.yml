@@ -4,7 +4,7 @@
 - include_tasks: check_space.yml
 
 - include_tasks: docker_deploy.yml
-  
+
 - name: Deploy Docker Swarm.
-  include_role: 
+  include_role:
     name: fgierlinger.docker_swarm

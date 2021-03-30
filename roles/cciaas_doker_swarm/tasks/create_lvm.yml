@@ -3,7 +3,7 @@
   yum:
     name: lvm2
     update_cache: true
-  
+
 - name: Creat lvm on empty disk.
   import_role:
     name: ansible-role-disk
@@ -15,12 +15,12 @@
         state: present
     lvg:
       - vg: "{{ alternative_vg_name }}"
-        pvs: 
-        - "{{ alternative_block_device }}1"
+        pvs:
+          - "{{ alternative_block_device }}1"
     lvol:
       - vg: "{{ alternative_vg_name }}"
         lv: "{{ alternative_lv_name }}"
-        linear: yes
+        linear: true
         size: 100%VG
     filesystem:
       - fstype: xfs
@@ -29,4 +29,4 @@
       - path: "{{ alternative_docker_dir }}"
         src: "/dev/{{ alternative_vg_name }}/{{ alternative_lv_name }}"
         fstype: xfs
-        opts: defaults      
+        opts: defaults

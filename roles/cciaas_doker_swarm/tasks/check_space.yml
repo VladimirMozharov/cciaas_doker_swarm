@@ -4,7 +4,7 @@
     set -o pipefail
     start=$(parted "{{ default_block_device }}" unit kb print free | tail -3 | awk "/Free Space/ { print \$1 }")
     if [ "$start" == "" ]
-    then 
+    then
       echo "changed: false"
     else
       parted -s "{{ default_block_device }}" resizepart 1 100%
@@ -29,7 +29,7 @@
   vars:
     mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount) | list | first }}"
   with_items:
-  - "{{ ansible_mounts }}"
+    - "{{ ansible_mounts }}"
   when: not use_alternative_docker_root_dir and mount.mount == docker_default_dir
 
 - name: Ensure that free space on the LV is greater than {{ min_space_available/1000000000 }} Gb.
@@ -41,5 +41,5 @@
   vars:
     mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount) | list | first }}"
   with_items:
-  - "{{ ansible_mounts }}"
+    - "{{ ansible_mounts }}"
   when: use_alternative_docker_root_dir and mount.mount == alternative_docker_dir
