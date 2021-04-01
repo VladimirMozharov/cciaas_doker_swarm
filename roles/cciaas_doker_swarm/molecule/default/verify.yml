@@ -4,7 +4,28 @@
 - name: Verify
   hosts: all
   gather_facts: false
+
   tasks:
-  - name: Example assertion
+  - name: Check docker nodes.
+    command: docker node ls
+    register: output1
+    changed_when: false
+
+  - name: Assert that instance is swarm master and there are not errores.
     assert:
-      that: true
+      that:
+        - "'Leader' in output1.stdout"
+        - "'Active' in output1.stdout"
+        - "'' == output1.stderr"
+
+  - name: Check that user docker exists.
+    shell: |
+      set -o pipefail
+      cat /etc/passwd | grep docker | cut -d ':' -f 1
+    register: output2
+    changed_when: false
+
+  - name: Assert that docker user is created.
+    assert:
+      that:
+        - "'docker' == output2.stdout"
