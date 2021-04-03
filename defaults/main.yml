@@ -17,5 +17,5 @@ storage_driver: "overlay2"
 # default for CentOS
 
 # Public key path on local machine for user 'docker'
-pub_key_path: "/home/vladimir/.ssh"
-pub_key_name: "for_docker_user.pub"
+# "{{ lookup('file', '/home/vladimir/.ssh/for_docker_user.pub') }}"
+pub_key: "xxxxx"

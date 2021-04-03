@@ -23,7 +23,7 @@
         Copy and set owner/group/permissions
         to user 'docker' for ssh connection.
   copy:
-    src: "{{ pub_key_path }}/{{ pub_key_name }}"
+    content: "{{ pub_key }}"
     dest: /home/docker/.ssh/authorized_keys
     group: docker
     owner: docker
