@@ -2,7 +2,8 @@
 - name: Try to resize system partition using shell script.
   shell: |
     set -o pipefail
-    start=$(parted "{{ default_block_device }}" unit kb print free | tail -3 | awk "/Free Space/ { print \$1 }")
+    start=$(parted "{{ default_block_device }}" unit kb print \
+    free | tail -3 | awk "/Free Space/ { print \$1 }")
     if [ "$start" == "" ]
     then
       echo "changed: false"
@@ -18,28 +19,38 @@
   include_tasks: create_lvm.yml
   when: use_alternative_docker_root_dir
 
-# after that we tried to increase available space on disk or on lv let's check if it is enough
+# after that we tried to increase available space on disk
+# or on lv let's check if it is enough
 
-- name: Ensure that free space on the disk is greater than {{ min_space_available/1000000000 }} Gb.
+- name: >
+    Ensure that free space on the disk is greater
+    than {{ min_space_available/1000000000 }} Gb.
   assert:
     that:
       - mount.size_available >= min_space_available
-    fail_msg: "Disk's space is not sufficient. Increase it and try again or use alternative lvm option"
+    fail_msg: "Disk's space is not sufficient.\
+              Increase it and try again or use alternative lvm option"
     success_msg: "Disk space is sufficient."
   vars:
-    mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount) | list | first }}"
+    mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount)\
+            | list | first }}"
   with_items:
     - "{{ ansible_mounts }}"
-  when: not use_alternative_docker_root_dir and mount.mount == docker_default_dir
+  when: >
+    not use_alternative_docker_root_dir and mount.mount == docker_default_dir
 
-- name: Ensure that free space on the LV is greater than {{ min_space_available/1000000000 }} Gb.
+- name: >
+        Ensure that free space on the LV is greater
+        than {{ min_space_available/1000000000 }} Gb.
   assert:
     that:
       - mount.size_available >= min_space_available
     fail_msg: "LV's space is not sufficient. Increase it and try again."
     success_msg: "Disk space is sufficient."
   vars:
-    mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount) | list | first }}"
+    mount: "{{ ansible_mounts | selectattr('mount','equalto',item.mount)\
+            | list | first }}"
   with_items:
     - "{{ ansible_mounts }}"
-  when: use_alternative_docker_root_dir and mount.mount == alternative_docker_dir
+  when: >
+    use_alternative_docker_root_dir and mount.mount == alternative_docker_dir

@@ -16,9 +16,9 @@ before_install:
 
 install:
   # Install Ansible.
-  - pip3 install ansible
-  - pip3 install ansible-lint
-  - pip3 install yamllint
+  - pip3 install ansible==3.1.0
+  - pip3 install ansible-lint==5.0.6
+  - pip3 install yamllint==1.26.0
 
 script:
   # Check the role/playbook's syntax.
@@ -26,3 +26,4 @@ script:
 
   # Run the ansible-lint with ansible-role
   - ansible-lint
+  - "yamllint -d '{extends: relaxed, rules: {line-length: {max: 120}}}' ."

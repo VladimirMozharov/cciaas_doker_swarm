@@ -19,7 +19,9 @@
     group: docker
     mode: '0755'
 
-- name: Copy and set owner/group/permissions to user 'docker' for ssh connection.
+- name: >
+        Copy and set owner/group/permissions
+        to user 'docker' for ssh connection.
   copy:
     src: "{{ pub_key_path }}/{{ pub_key_name }}"
     dest: /home/docker/.ssh/authorized_keys
