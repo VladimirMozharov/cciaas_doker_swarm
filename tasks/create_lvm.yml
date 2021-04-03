@@ -6,7 +6,7 @@
 
 - name: Creat lvm on empty disk.
   import_role:
-    name: ansible-role-disk
+    name: kevincoakley.disk
   vars:
     parted:
       - device: "{{ alternative_block_device }}"

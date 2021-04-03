@@ -1,9 +1,4 @@
 bin/
 lib/
 pyvenv.cfg
-bash_scripts/
 .cache/
-roles/ansible-role-disk
-roles/fgierlinger.docker_swarm
-roles/geerlingguy.docker
-roles/geerlingguy.pip

@@ -1,0 +1,6 @@
+---
+roles:
+  - fgierlinger.docker_swarm
+  - kevincoakley.disk
+  - geerlingguy.docker
+  - geerlingguy.pip

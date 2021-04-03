@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Control free disk space and deploy docker swarm on CentOS VMs
+Control free disk space and deploy docker swarm on CentOS 8 VMs
 
 Role Variables
 --------------
@@ -35,7 +35,24 @@ Example Playbook
     min_space_available: 20000000000
 
   roles:
-  - role: cciaas.doker_swarm
+  - role: cciaas_doker_swarm
+
+Example hosts file
+----------
+
+swarm-01 ansible_ssh_host=127.0.0.1
+swarm-02 ansible_ssh_host=127.0.0.2
+
+[docker_swarm_engine]
+swarm-01
+swarm-02
+
+[docker_swarm_manager]
+swarm-01
+
+[docker_swarm_worker]
+swarm-02
+
 
 License
 -------

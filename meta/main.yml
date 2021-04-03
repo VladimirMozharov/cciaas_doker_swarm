@@ -13,10 +13,10 @@ galaxy_info:
       versions:
         - 8
 
-  galaxy_tags: [docker, swarm, CentOS8]
+  galaxy_tags: [docker, swarm, centos8]
 
-dependencies:
-  - fgierlinger.docker_swarm
-  - kevincoakley.disk
-  - geerlingguy.docker
-  - geerlingguy.pip
+dependencies: []
+# - fgierlinger.docker_swarm
+# - kevincoakley.disk
+# - geerlingguy.docker
+# - geerlingguy.pip

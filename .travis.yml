@@ -21,9 +21,6 @@ install:
   - pip3 install yamllint==1.26.0
 
 script:
-  # Check the role/playbook's syntax.
-  # - ansible-playbook deploy.yml --syntax-check
-
   # Run the ansible-lint with ansible-role
   - ansible-lint
   - "yamllint -d '{extends: relaxed, rules: {line-length: {max: 120}}}' ."

@@ -1,22 +1,33 @@
 ---
 dependency:
   name: galaxy
+  options:
+    ignore-certs: true
+    ignore-errors: true
+    role-file: ./requirements.yml
+
 driver:
   name: docker
+
 platforms:
-  - name: instance
-    image: geerlingguy/docker-centos8-ansible:latest
-    command: ""
+  - name: centos8
+    image: geerlingguy/docker-centos8-ansible
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
+    command: ""
     pre_build_image: true
+    privileged: true
+
 lint: |
   set -e
-  yamllint .
+  ansible-lint . -vv
 # yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" .
+
 provisioner:
   name: ansible
   log: true
   lint:
     name: ansible-lint
+
+verifier:
+  name: ansible

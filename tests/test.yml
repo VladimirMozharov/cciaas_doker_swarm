@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
   roles:
-    - cciaas_doker_swarm
+    - vladimir_mozharov.cciaas_doker_swarm
