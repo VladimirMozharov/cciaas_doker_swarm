@@ -14,13 +14,14 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
+services:
+  - docker
+
 install:
-  # Install Ansible.
-  - pip3 install ansible==3.1.0
-  - pip3 install ansible-lint==5.0.6
-  - pip3 install yamllint==1.26.0
+  # Install packages
+  - pip3 install -r requirements.txt
 
 script:
-  # Run the ansible-lint with ansible-role
-  - ansible-lint
-  - yamllint .
+  - molecule --version
+  - ansible --version
+  - molecule test

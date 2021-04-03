@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/VladimirMozharov/CCIaaS_Kiratech.svg?branch=main)](https://travis-ci.com/VladimirMozharov/CCIaaS_Kiratech)
+
 Code Challenge IaaS (cciaas) Docker Swarm for Kiratech
 =========
 
