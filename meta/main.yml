@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: cciaas_doker_swarm
+  author: vladimir_mozharov
+  description: Control disk space and deploy docker swarm.
+
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: EL
+      versions:
+        - 8
+
+  galaxy_tags: [docker, swarm, CentOS8]
+
+dependencies:
+  - fgierlinger.docker_swarm
+  - kevincoakley.disk
+  - geerlingguy.docker
+  - geerlingguy.pip

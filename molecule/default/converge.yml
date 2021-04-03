@@ -17,4 +17,4 @@
       failed_when: systemctl_status.rc > 1
 
   roles:
-    - cciaas_doker_swarm
+    - vladimir_mozharov.cciaas_doker_swarm

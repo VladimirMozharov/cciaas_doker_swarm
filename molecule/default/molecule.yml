@@ -13,8 +13,10 @@ platforms:
     pre_build_image: true
 lint: |
   set -e
-  yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" .
-  ansible-lint
+  yamllint .
+# yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" .
 provisioner:
   name: ansible
   log: true
+  lint:
+    name: ansible-lint

@@ -1,0 +1,14 @@
+---
+dependencies:
+  - src: fgierlinger.docker_swarm
+    version: 1.1.0
+    name: fgierlinger.docker_swarm
+  - src: kevincoakley.disk
+    version: 1.0.3
+    name: ansible-role-disk
+  - src: geerlingguy.docker
+    version: 3.1.0
+    name: geerlingguy.docker
+  - src: geerlingguy.pip
+    version: 2.0.0
+    name: geerlingguy.pip

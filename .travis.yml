@@ -22,7 +22,7 @@ install:
 
 script:
   # Check the role/playbook's syntax.
-  - ansible-playbook deploy.yml --syntax-check
+  # - ansible-playbook deploy.yml --syntax-check
 
   # Run the ansible-lint with ansible-role
   - ansible-lint

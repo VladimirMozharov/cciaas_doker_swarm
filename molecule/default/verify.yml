@@ -14,9 +14,9 @@
   - name: Assert that instance is swarm master and there are not errores.
     assert:
       that:
-      - "'Leader' in output1.stdout"
-      - "'Active' in output1.stdout"
-      - "'' == output1.stderr"
+        - "'Leader' in output1.stdout"
+        - "'Active' in output1.stdout"
+        - "'' == output1.stderr"
 
   - name: Check that user docker exists.
     shell: |
@@ -28,4 +28,4 @@
   - name: Assert that docker user is created.
     assert:
       that:
-      - "'docker' == output2.stdout"
+        - "'docker' == output2.stdout"
