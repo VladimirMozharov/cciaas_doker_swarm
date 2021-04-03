@@ -6,17 +6,40 @@
   gather_facts: false
 
   tasks:
-  - name: Check docker nodes.
-    command: docker node ls
-    register: output1
+  - name: Check docker swarm status.
+    shell: |
+      set -o pipefail
+      docker info | grep swarm -i
+    register: swarm_status
     changed_when: false
 
-  - name: Assert that instance is swarm master and there are not errores.
+  - name: Check if node is swarm manager.
+    shell: |
+      set -o pipefail
+      docker info |grep 'is manager' -i
+    register: is_swarm_manager
+    changed_when: false
+
+  - name: Assert that swarm is active on node and there are not errores.
     assert:
       that:
-        - "'Leader' in output1.stdout"
-        - "'Active' in output1.stdout"
-        - "'' == output1.stderr"
+        - "'active' in swarm_status.stdout"
+        - "'' == swarm_status.stderr"
+    when: "'docker_swarm_engine' in group_names"
+
+  - name: Assert that master is swarm master and there are not errores.
+    assert:
+      that:
+        - "'true' in is_swarm_manager.stdout"
+        - "'' == is_swarm_manager.stderr"
+    when: "'docker_swarm_manager' in group_names"
+
+  - name: Assert that worker is swarm worker and there are not errores.
+    assert:
+      that:
+        - "'false' in is_swarm_manager.stdout"
+        - "'' == is_swarm_manager.stderr"
+    when: "'docker_swarm_worker' in group_names"
 
   - name: Check that user docker exists.
     shell: |

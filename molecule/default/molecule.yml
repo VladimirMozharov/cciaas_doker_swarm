@@ -10,18 +10,31 @@ driver:
   name: docker
 
 platforms:
-  - name: centos8
+  - name: centos8-1
     image: geerlingguy/docker-centos8-ansible
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: ""
     pre_build_image: true
     privileged: true
+    groups:
+      - docker_swarm_engine
+      - docker_swarm_manager
+  - name: centos8-2
+    image: geerlingguy/docker-centos8-ansible
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: ""
+    pre_build_image: true
+    privileged: true
+    groups:
+      - docker_swarm_engine
+      - docker_swarm_worker
 
 lint: |
   set -e
   ansible-lint . -vv
-# yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" .
+  yamllint .
 
 provisioner:
   name: ansible

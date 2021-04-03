@@ -24,4 +24,5 @@ install:
 script:
   - molecule --version
   - ansible --version
+  - molecule lint
   - molecule test
