@@ -19,5 +19,6 @@ install:
 script:
   - molecule --version
   - ansible --version
+  - molecule -v lint
   - molecule -v converge
   - molecule -v verify

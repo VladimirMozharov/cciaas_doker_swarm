@@ -24,31 +24,28 @@
     assert:
       that:
         - "'active' in swarm_status.stdout"
-        - "'' == swarm_status.stderr"
     when: "'docker_swarm_engine' in group_names"
 
   - name: Assert that master is swarm master and there are not errores.
     assert:
       that:
         - "'true' in is_swarm_manager.stdout"
-        - "'' == is_swarm_manager.stderr"
     when: "'docker_swarm_manager' in group_names"
 
   - name: Assert that worker is swarm worker and there are not errores.
     assert:
       that:
         - "'false' in is_swarm_manager.stdout"
-        - "'' == is_swarm_manager.stderr"
     when: "'docker_swarm_worker' in group_names"
 
   - name: Check that user docker exists.
     shell: |
       set -o pipefail
       cat /etc/passwd | grep docker | cut -d ':' -f 1
-    register: output2
+    register: output
     changed_when: false
 
   - name: Assert that docker user is created.
     assert:
       that:
-        - "'docker' == output2.stdout"
+        - "'docker' == output.stdout"

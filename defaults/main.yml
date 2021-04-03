@@ -6,6 +6,7 @@ min_space_available: 40000000000
 
 docker_default_dir: "/"
 default_block_device: "/dev/vda"
+docker_storage_driver: "overlay2"
 
 # in case we want to save docker images on dedicated lvm on all hosts
 use_alternative_docker_root_dir: false
@@ -13,8 +14,6 @@ alternative_docker_dir: "/mnt/docker"
 alternative_block_device: "/dev/sda"
 alternative_vg_name: "test_vg"
 alternative_lv_name: "test_lv"
-storage_driver: "overlay2"
-# default for CentOS
 
 # Public key path on local machine for user 'docker'
 # "{{ lookup('file', '/home/vladimir/.ssh/for_docker_user.pub') }}"

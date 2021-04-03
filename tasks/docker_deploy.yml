@@ -44,7 +44,7 @@
   vars:
     json:
       graph: "{{ alternative_docker_dir }}"
-      storage-driver: "{{ storage_driver }}"
+      storage-driver: "{{ docker_storage_driver }}"
   when: use_alternative_docker_root_dir
   notify: restart daemon and docker
 
