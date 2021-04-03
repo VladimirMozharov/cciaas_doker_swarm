@@ -2,11 +2,6 @@
 language: python
 python: "3.8"
 
-# Doc: https://docs.travis-ci.com/user/customizing-the-build#Build-Matrix
-# env:
-#   - ANSIBLE_VERSION=2.10.7
-#   - ANSIBLE_LINT_VERSION=5.0.6
-
 branches:
   only:
     - main
@@ -24,5 +19,5 @@ install:
 script:
   - molecule --version
   - ansible --version
-  - molecule lint
-  - molecule test
+  - molecule -v converge
+  - molecule -v verify
